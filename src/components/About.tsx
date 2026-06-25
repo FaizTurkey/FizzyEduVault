@@ -22,9 +22,8 @@ export default function About() {
           <div className="relative inline-block mb-8">
             <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary-500 to-secondary-500 blur-xl opacity-60 animate-pulse" />
             <div className="relative w-40 h-40 sm:w-48 sm:h-48 rounded-full p-1.5 bg-gradient-to-br from-primary-500 via-secondary-500 to-accent-400">
-              <div className="w-full h-full rounded-full overflow-hidden bg-slate-100 dark:bg-slate-800 grid place-items-center">
-                {/* Replace this placeholder with your own image later */}
-                <User className="w-20 h-20 text-slate-400" />
+              <div className="w-full h-full rounded-full overflow-hidden bg-slate-100 dark:bg-slate-800 ">
+                <img src="/profile.jpg" alt="Profile" className="w-full h-full object-cover" />
               </div>
             </div>
             <motion.span
@@ -36,16 +35,16 @@ export default function About() {
             </motion.span>
           </div>
 
-          <h3 className="font-display font-bold text-3xl mb-3">Faiz</h3>
+          <h3 className="font-display font-bold text-3xl mb-3">Muhammad Faiz</h3>
 
           <p className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed max-w-xl mx-auto">
-            Passionate about helping students access quality educational resources and previous
+           A 3rd Year Student Passionate about helping students access quality educational resources and previous
             year papers through technology.
           </p>
 
           {/* LinkedIn button */}
           <motion.a
-            href={LINKEDIN_URL}
+            href="https://www.linkedin.com/in/mohdfaiz12"
             target="_blank"
             rel="noopener noreferrer"
             whileHover={{ scale: 1.05, y: -2 }}

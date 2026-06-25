@@ -14,7 +14,7 @@ export default function PapersSection() {
         <SectionHeading
           eyebrow="Library"
           title="Available Papers"
-          subtitle="Browse our curated collection of previous year question papers. Download what you need — completely free."
+          subtitle="Browse our curated collection of previous year question papers. Download what you need.."
         />
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">

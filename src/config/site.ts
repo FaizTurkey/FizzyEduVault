@@ -4,10 +4,10 @@
  */
 
 // Replace this with your LinkedIn profile URL
-export const LINKEDIN_URL = 'https://www.linkedin.com/in/faiz'
+export const LINKEDIN_URL = "https://www.linkedin.com/in/mohdfaiz12"
 
 // Replace this URL with your Freeform.io endpoint
-export const FREEFORM_ENDPOINT: string = 'https://www.freeform.io/your-form-endpoint'
+export const FREEFORM_ENDPOINT: string = "https://formspree.io/f/xeebavvl"
 
 export const SITE = {
   name: 'FizzyEduVault',
