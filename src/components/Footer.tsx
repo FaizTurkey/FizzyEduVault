@@ -1,4 +1,4 @@
-import { GraduationCap, Linkedin, Github, Twitter, Mail, ArrowUp } from 'lucide-react'
+import { GraduationCap, Linkedin, Github, } from 'lucide-react'
 import { SITE, LINKEDIN_URL } from '../config/site'
 
 const QUICK_LINKS = [
@@ -13,7 +13,6 @@ export default function Footer() {
   const go = (id: string) =>
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
 
-  const toTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
 
   return (
     <footer className="relative border-t border-white/10 glass">
