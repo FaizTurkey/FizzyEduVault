@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light dark;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    @apply font-sans bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-500;
+  }
+
+  ::selection {
+    @apply bg-primary-500/30 text-primary-700 dark:text-primary-200;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-slate-100 dark:bg-slate-900;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gradient-to-b from-primary-500 to-secondary-500 rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply from-primary-600 to-secondary-600;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply bg-white/70 dark:bg-slate-900/60 backdrop-blur-xl border border-white/40 dark:border-white/10;
+  }
+
+  .glass-card {
+    @apply bg-white/60 dark:bg-slate-800/40 backdrop-blur-xl border border-white/50 dark:border-white/10;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary-500 via-secondary-500 to-primary-500 bg-clip-text text-transparent;
+    background-size: 200% auto;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-white
+           bg-gradient-to-r from-primary-500 to-secondary-500
+           shadow-lg shadow-primary-500/25 hover:shadow-xl hover:shadow-primary-500/40
+           hover:scale-[1.03] active:scale-[0.98] transition-all duration-300;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold
+           glass hover:bg-white/90 dark:hover:bg-slate-800/70
+           hover:scale-[1.03] active:scale-[0.98] transition-all duration-300;
+  }
+
+  .section-pad {
+    @apply px-4 sm:px-6 lg:px-8 py-20 sm:py-28;
+  }
+
+  .container-x {
+    @apply max-w-7xl mx-auto w-full;
+  }
+}
+
+@layer utilities {
+  .animate-gradient {
+    background-size: 200% auto;
+    animation: gradient 8s ease infinite;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}
