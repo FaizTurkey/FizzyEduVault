@@ -15,7 +15,7 @@ export default function Hero() {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center overflow-hidden pt-24 pb-16">
+    <section id="home" className="relative min-h-screen flex items-center overflow-hidden pt-8 pb-16">
       {/* Animated gradient blobs */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute top-0 -left-20 w-72 h-72 bg-primary-500/30 dark:bg-primary-500/20 rounded-full blur-3xl animate-blob" />
