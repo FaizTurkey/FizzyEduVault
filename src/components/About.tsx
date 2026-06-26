@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion'
-import { Linkedin, User } from 'lucide-react'
-import { LINKEDIN_URL } from '../config/site'
+import { Linkedin } from 'lucide-react'
 import { SectionHeading } from './SearchSection'
 
 export default function About() {
