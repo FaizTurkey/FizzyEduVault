@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Search, FileStack, Sparkles, BookOpen, Download, GraduationCap } from 'lucide-react'
+import { Search, FileStack} from 'lucide-react'
 
 const container = {
   hidden: { opacity: 0 },
@@ -67,14 +67,14 @@ export default function Hero() {
   )
 }
 
-function Stat({ value, label }: { value: string; label: string }) {
-  return (
-    <div>
-      <div className="font-display font-bold text-2xl gradient-text">{value}</div>
-      <div className="text-slate-500 dark:text-slate-400">{label}</div>
-    </div>
-  )
-}
+// function Stat({ value, label }: { value: string; label: string }) {
+//   return (
+//     <div>
+//       <div className="font-display font-bold text-2xl gradient-text">{value}</div>
+//       <div className="text-slate-500 dark:text-slate-400">{label}</div>
+//     </div>
+//   )
+// }
 
 function HeroIllustration() {
   return (
