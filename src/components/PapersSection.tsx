@@ -30,6 +30,7 @@ export default function PapersSection() {
 function PaperCard({ paper, index }: { paper: Paper; index: number }) {
   return (
     <motion.article
+      id={`paper-${paper.id}`}
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-50px' }}
