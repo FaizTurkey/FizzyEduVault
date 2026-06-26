@@ -27,9 +27,11 @@ export default function Navbar() {
   }, [])
 
   const go = (id: string) => {
+  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  setTimeout(() => {
     setOpen(false)
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-  }
+  }, 1000)
+}
 
   return (
     <motion.header
@@ -104,7 +106,7 @@ export default function Navbar() {
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden overflow-hidden glass border-t border-white/10"
+            className="md:hidden overflow-hidden glass border-t border-white/10 absolute top-full left-0 w-full z-50 shadow-2xl"
           >
             <ul className="px-4 py-4 space-y-1">
               {NAV_ITEMS.map((item) => (
