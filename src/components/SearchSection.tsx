@@ -158,7 +158,7 @@ export default function SearchSection() {
                           // onClick={(e) => p.pdfUrl === '#' && e.preventDefault()}
                           className="text-sm font-medium text-primary-600 dark:text-primary-300 hover:underline shrink-0"
                         >
-                          View
+                          
                          
                         </a>
                       </motion.li>
