@@ -12,12 +12,12 @@ export interface Paper {
 export const papers: Paper[] = [
   {
     id: 1,
-    subject: 'Data Structures',
+    subject: 'ELECTRONICS External Ist Year',
     university: 'AKTU',
-    course: 'B.Tech CSE',
-    year: 2024,
-    pdfUrl: '#',
-    tags: ['DSA', 'Algorithms', 'Trees', 'Graphs'],
+    course: 'B.Tech ASH',
+    year: 2025,
+    pdfUrl: '/papers/ELECTRONICS_Faiz.pdf',
+    tags: ['Common To All'],
   },
   {
     id: 2,
