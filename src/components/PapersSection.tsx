@@ -79,6 +79,7 @@ function PaperCard({ paper, index }: { paper: Paper; index: number }) {
 
         <a
           href={paper.pdfUrl}
+          download={`${paper.subject}.pdf`}
           onClick={(e) => paper.pdfUrl === '#' && e.preventDefault()}
           className="btn-primary w-full text-sm py-2.5"
         >
