@@ -3,7 +3,26 @@ import { FileText, Download, Calendar, Building2, BookMarked } from 'lucide-reac
 import { papers, type Paper } from '../data/papers'
 import { SectionHeading } from './SearchSection'
 
-export default function PapersSection() {
+type AcademicYear = 1 | 2 | 3 | 4
+
+const yearTitles: Record<AcademicYear, string> = {
+  1: '1st Year',
+  2: '2nd Year',
+  3: '3rd Year',
+  4: '4th Year',
+}
+
+export default function PapersSection({
+  selectedYear,
+  onClearYear,
+}: {
+  selectedYear: AcademicYear | null
+  onClearYear: () => void
+}) {
+  const visiblePapers = selectedYear
+    ? papers.filter((paper) => paper.academicYear === selectedYear)
+    : papers
+
   return (
     <section id="papers" className="section-pad relative overflow-hidden">
       {/* soft background accent */}
@@ -12,16 +31,42 @@ export default function PapersSection() {
 
       <div className="container-x">
         <SectionHeading
-          eyebrow="Library"
-          title="Available Papers"
-          subtitle="Browse our curated collection of previous year question papers. Download what you need.."
+          eyebrow={selectedYear ? yearTitles[selectedYear] : 'Library'}
+          title={selectedYear ? `${yearTitles[selectedYear]} Papers` : 'Available Papers'}
+          subtitle={selectedYear
+            ? `Browse the papers currently grouped under ${yearTitles[selectedYear]}. Use the button below to see the full library.`
+            : 'Browse our collection of question papers. Choose an academic year above or explore the full library.'}
         />
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {papers.map((paper, i) => (
-            <PaperCard key={paper.id} paper={paper} index={i} />
-          ))}
-        </div>
+        {selectedYear !== null && (
+          <div className="mb-7 flex flex-wrap items-center justify-center gap-3">
+            <span className="rounded-full bg-primary-500/10 px-3 py-1.5 text-sm font-medium text-primary-700 dark:text-primary-300">
+              Showing {yearTitles[selectedYear]}
+            </span>
+            <button type="button" onClick={onClearYear} className="btn-ghost !px-4 !py-2 text-sm">
+              Show all papers
+            </button>
+          </div>
+        )}
+
+        {visiblePapers.length > 0 ? (
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {visiblePapers.map((paper, i) => (
+              <PaperCard key={paper.id} paper={paper} index={i} />
+            ))}
+          </div>
+        ) : (
+          <div className="glass-card mx-auto max-w-xl rounded-2xl p-8 text-center">
+            <BookMarked className="mx-auto mb-3 h-9 w-9 text-primary-500" />
+            <h3 className="font-display text-xl font-bold">More papers coming soon</h3>
+            <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
+              There are no papers grouped under {yearTitles[selectedYear!]} yet. Add the relevant papers in src/data/papers.ts when they are available.
+            </p>
+            <button type="button" onClick={onClearYear} className="btn-primary mt-5 !py-2.5 text-sm">
+              Browse all papers
+            </button>
+          </div>
+        )}
       </div>
     </section>
   )
@@ -48,7 +93,7 @@ function PaperCard({ paper, index }: { paper: Paper; index: number }) {
           </span>
           <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-accent-400/15 text-accent-600 dark:text-accent-400">
             <Calendar className="w-3 h-3" />
-            {paper.year}
+            {paper.year} Paper
           </span>
         </div>
 
