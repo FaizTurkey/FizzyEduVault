@@ -41,9 +41,9 @@ export default function Hero() {
             </motion.p>
 
             <motion.div variants={item} className="mt-8 flex flex-wrap gap-4">
-              <button onClick={() => go('papers')} className="btn-primary">
+              <button onClick={() => go('years')} className="btn-primary">
                 <FileStack className="w-5 h-5" />
-                Browse Papers
+                Browse by Year
               </button>
               <button onClick={() => go('search')} className="btn-ghost">
                 <Search className="w-5 h-5" />

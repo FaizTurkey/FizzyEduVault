@@ -7,6 +7,7 @@ import { SITE } from '../config/site'
 
 const NAV_ITEMS = [
   { label: 'Home', id: 'home' },
+  { label: 'Browse by Year', id: 'years' },
   { label: 'Search Papers', id: 'search' },
   { label: 'Available Papers', id: 'papers' },
   { label: 'About', id: 'about' },
