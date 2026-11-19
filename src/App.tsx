@@ -6,8 +6,20 @@ import About from './components/About'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import { PWAInstallPrompt } from './components/PWAInstallPrompt'
+import { useAuth } from './context/AuthContext'
+import { LoginPage } from './components/LoginPage'
+
 
 export default function App() {
+  const {user} = useAuth();
+  if(!user){
+    return (
+      <>
+      <LoginPage/>
+      <PWAInstallPrompt/>
+      </>
+    )
+  }
   return (
     <div className="relative min-h-screen overflow-x-hidden">
       <Navbar />
