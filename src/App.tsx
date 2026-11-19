@@ -5,6 +5,7 @@ import PapersSection from './components/PapersSection'
 import About from './components/About'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
+import { PWAInstallPrompt } from './components/PWAInstallPrompt'
 
 export default function App() {
   return (
@@ -18,6 +19,7 @@ export default function App() {
         <Contact />
       </main>
       <Footer />
+      <PWAInstallPrompt/>
     </div>
   )
 }
