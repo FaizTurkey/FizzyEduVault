@@ -16,7 +16,7 @@ export const PWAInstallPrompt: React.FC = () => {
     const isStandalone =
       window.matchMedia('(display-mode: standalone)').matches ||
       (window.navigator as Navigator & { standalone?: boolean }).standalone ===
-        true;
+      true;
 
     if (isStandalone) return;
 
@@ -37,16 +37,24 @@ export const PWAInstallPrompt: React.FC = () => {
       return () => clearTimeout(timer);
     }
 
-    // 4. Listen for Android / Desktop Chrome install event
+    // 4. Agar event pehle hi main.tsx mein capture ho chuka hai:
+    if (window.deferredPWAPrompt) {
+      setDeferredPrompt(window.deferredPWAPrompt as BeforeInstallPromptEvent);
+      setTimeout(() => setShowPrompt(true), 1500);
+    }
+
+    // Aur agar baad mein fire ho:
     const handleBeforeInstall = (e: Event) => {
       e.preventDefault();
+      window.deferredPWAPrompt = e;
       setDeferredPrompt(e as BeforeInstallPromptEvent);
-      setTimeout(() => setShowPrompt(true), 2000);
+      setTimeout(() => setShowPrompt(true), 1500);
     };
 
     const handleAppInstalled = () => {
       setShowPrompt(false);
       setDeferredPrompt(null);
+      window.deferredPWAPrompt = undefined;
     };
 
     window.addEventListener('beforeinstallprompt', handleBeforeInstall);
