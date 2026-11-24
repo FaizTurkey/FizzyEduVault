@@ -2,8 +2,23 @@ import { motion } from 'framer-motion'
 import { FileText, Download, Calendar, Building2, BookMarked } from 'lucide-react'
 import { papers, type Paper } from '../data/papers'
 import { SectionHeading } from './SearchSection'
+import { useState } from 'react'
+import { DownloadToast } from './DownloadToast'
 
 export default function PapersSection() {
+
+  const [dlStatus, setDlStatus] = useState<'idle' | 'downloading' | 'done'>('idle')
+  const [dlFileName, setDlFileName] = useState('')
+  const [dlFileUrl, setDlFileUrl] = useState('')
+
+  const handleDownload = (subject: string, pdfUrl: string) => {
+    setDlFileName(`${subject}.pdf`)
+    setDlFileUrl(pdfUrl)
+    setDlStatus('downloading')
+    setTimeout(() => setDlStatus('done'), 1500)
+    setTimeout(() => setDlStatus('idle'), 7000)
+  }
+
   return (
     <section id="papers" className="section-pad relative overflow-hidden">
       {/* soft background accent */}
@@ -19,15 +34,16 @@ export default function PapersSection() {
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {papers.map((paper, i) => (
-            <PaperCard key={paper.id} paper={paper} index={i} />
+            <PaperCard key={paper.id} paper={paper} index={i} onDownload={handleDownload} />
           ))}
         </div>
       </div>
+      <DownloadToast status={dlStatus} fileName={dlFileName} fileUrl={dlFileUrl} />
     </section>
   )
 }
 
-function PaperCard({ paper, index }: { paper: Paper; index: number }) {
+function PaperCard({ paper, index, onDownload, }: { paper: Paper; index: number, onDownload: (subject: string, pdf:string) => void }) {
   return (
     <motion.article
       id={`paper-${paper.id}`}
@@ -81,7 +97,13 @@ function PaperCard({ paper, index }: { paper: Paper; index: number }) {
         <a
           href={paper.pdfUrl}
           download={`${paper.subject}.pdf`}
-          onClick={(e) => paper.pdfUrl === '#' && e.preventDefault()}
+          onClick={(e) => {
+            if (paper.pdfUrl === '#') {
+              e.preventDefault()
+            } else {
+              onDownload(paper.subject, paper.pdfUrl)
+            }
+          }}
           className="btn-primary w-full text-sm py-2.5"
         >
           <Download className="w-4 h-4" />
