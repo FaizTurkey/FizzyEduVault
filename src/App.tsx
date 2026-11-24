@@ -8,6 +8,7 @@ import Footer from './components/Footer'
 import { PWAInstallPrompt } from './components/PWAInstallPrompt'
 import { useAuth } from './context/AuthContext'
 import { LoginPage } from './components/LoginPage'
+import { WhatsAppFloat } from './components/WhatsAppFloat'
 
 
 export default function App() {
@@ -32,6 +33,7 @@ export default function App() {
       </main>
       <Footer />
       <PWAInstallPrompt/>
+      <WhatsAppFloat/>
     </div>
   )
 }
