@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import { FileText, Download, Calendar, Building2, BookMarked } from 'lucide-react'
 import { papers, type Paper } from '../data/papers'
 import { SectionHeading } from './SearchSection'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { DownloadToast } from './DownloadToast'
 
 export default function PapersSection() {
@@ -10,6 +10,27 @@ export default function PapersSection() {
   const [dlStatus, setDlStatus] = useState<'idle' | 'downloading' | 'done'>('idle')
   const [dlFileName, setDlFileName] = useState('')
   const [dlFileUrl, setDlFileUrl] = useState('')
+
+  const [revealedId, setRevealedId] = useState<Paper['id'] | null>(null)
+
+  useEffect(() => {
+    const handleReveal = (e: Event) => {
+      const id = (e as CustomEvent<Paper['id']>).detail
+      setRevealedId(id)
+      setTimeout(() => {
+        const el = document.getElementById(`paper-${id}`)
+        el?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+      }, 100)
+    }
+    window.addEventListener('reveal-paper', handleReveal)
+    return () => window.removeEventListener('reveal-paper', handleReveal)
+  }, [])
+
+  const visiblePapers = papers.slice(0, 5)
+  if (revealedId && !visiblePapers.some((p) => p.id === revealedId)) {
+    const found = papers.find((p) => p.id === revealedId)
+    if (found) visiblePapers.push(found)
+  }
 
   const handleDownload = (subject: string, pdfUrl: string) => {
     setDlFileName(`${subject}.pdf`)
@@ -33,17 +54,31 @@ export default function PapersSection() {
         />
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {papers.map((paper, i) => (
+          {visiblePapers.map((paper, i) => (
             <PaperCard key={paper.id} paper={paper} index={i} onDownload={handleDownload} />
           ))}
         </div>
+        {papers.length > 5 && (
+          <div className="mt-8 text-center">
+            <p className="text-xs text-slate-400">
+              Showing top 5 of <span className="font-semibold text-white">{papers.length}</span> papers.{' '}
+              <a
+                href="#search"
+                className="font-semibold text-cyan-400 hover:underline"
+              >
+                Search above
+              </a>{' '}
+              to find any specific paper.
+            </p>
+          </div>
+        )}
       </div>
       <DownloadToast status={dlStatus} fileName={dlFileName} fileUrl={dlFileUrl} />
     </section>
   )
 }
 
-function PaperCard({ paper, index, onDownload, }: { paper: Paper; index: number, onDownload: (subject: string, pdf:string) => void }) {
+function PaperCard({ paper, index, onDownload, }: { paper: Paper; index: number, onDownload: (subject: string, pdf: string) => void }) {
   return (
     <motion.article
       id={`paper-${paper.id}`}

@@ -88,7 +88,7 @@ export const papers: Paper[] = [
     course: 'B.Tech CSE',
     year: 2025,
     pdfUrl: '/papers/ds.pdf',
-    tags: ['Data Structures','DS'],
+    tags: ['Data Structures','DSA'],
   },
   {
     id: 10,

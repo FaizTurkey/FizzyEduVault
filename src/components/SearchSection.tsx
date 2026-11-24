@@ -74,11 +74,10 @@ export default function SearchSection() {
               <button
                 key={f.key}
                 onClick={() => setFilter(f.key)}
-                className={`px-3 py-1.5 rounded-full text-sm font-medium transition-all ${
-                  filter === f.key
+                className={`px-3 py-1.5 rounded-full text-sm font-medium transition-all ${filter === f.key
                     ? 'bg-gradient-to-r from-primary-500 to-secondary-500 text-white shadow-md shadow-primary-500/30'
                     : 'glass hover:scale-105'
-                }`}
+                  }`}
               >
                 {f.label}
               </button>
@@ -133,11 +132,14 @@ export default function SearchSection() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -10 }}
                         className="flex items-center gap-3 p-3 sm:p-4 rounded-xl glass-card hover:scale-[1.01] transition-transform cursor-pointer"
-                        onClick={()=>{
-                          const paperElement = document.getElementById(`paper-${p.id}`);
-                          if (paperElement) {
-                            paperElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                          }
+                        // onClick={()=>{
+                        //   const paperElement = document.getElementById(`paper-${p.id}`);
+                        //   if (paperElement) {
+                        //     paperElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        //   }
+                        // }}
+                        onClick={() => {
+                          window.dispatchEvent(new CustomEvent('reveal-paper', { detail: p.id }))
                         }}
                       >
                         <span className="grid place-items-center w-10 h-10 rounded-lg bg-gradient-to-br from-primary-500 to-secondary-500 text-white shrink-0">
@@ -151,15 +153,15 @@ export default function SearchSection() {
                         </div>
                         <a
                           href={p.pdfUrl}
-                          onClick={(e)=>{
+                          onClick={(e) => {
                             e.stopPropagation();
-                            if(p.pdfUrl === '#') e.preventDefault();
+                            if (p.pdfUrl === '#') e.preventDefault();
                           }}
                           // onClick={(e) => p.pdfUrl === '#' && e.preventDefault()}
                           className="text-sm font-medium text-primary-600 dark:text-primary-300 hover:underline shrink-0"
                         >
-                          
-                         
+
+
                         </a>
                       </motion.li>
                     ))}
